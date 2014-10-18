@@ -1,0 +1,9 @@
+build docker image :
+====================
+
+docker build -t="echinopsii/fedora.20.systemd.bind" .
+
+run docker image :
+==================
+
+docker run --privileged -ti -v /sys/fs/cgroup:/sys/fs/cgroup:ro -d --name bind -h bind -p 53:53 echinopsii/fedora.20.systemd.bind
