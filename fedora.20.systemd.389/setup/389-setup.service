@@ -1,0 +1,11 @@
+[Unit]
+Description=389 setup service 
+After=syslog.target network.target auditd.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/setup_run.sh
+
+[Install]
+WantedBy=multi-user.target

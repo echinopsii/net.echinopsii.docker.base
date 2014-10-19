@@ -1,0 +1,19 @@
+[General] 
+FullMachineName= FQDN
+SuiteSpotUserID= nobody 
+SuiteSpotGroup= nobody 
+AdminDomain= ADMIN_DOMAIN
+ConfigDirectoryAdminID= CONFIG_DIR_ADMIN_ID
+ConfigDirectoryAdminPwd= CONFIG_DIR_ADMIN_PWD
+ConfigDirectoryLdapURL= ldap://FQDN:389/o=NetscapeRoot 
+
+[slapd] 
+SlapdConfigForMC= Yes 
+UseExistingMC= 0 
+ServerPort= 389 
+ServerIdentifier= SERVER_IDENTIFIER 
+Suffix= SUFFIX
+RootDN= DIRECTORY_MANAGER_ID 
+RootDNPwd= DIRECTORY_MANAGER_PWD
+ds_bename= DS_USER_DB
+AddSampleEntries= No
