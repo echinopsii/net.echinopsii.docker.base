@@ -31,8 +31,6 @@ sudo chown root.docker /var/lib/389.env
 ```
 then edit file /var/lib/389.env to fit your env. Each environment variable must be set to get a working 389 setup.
 
-NOTE : 389.env will be deleted at then end of 389 configuration for security purpose
-
 
 run docker image :
 ==================
