@@ -5,7 +5,6 @@ cluster = Cluster(['192.168.33.22'])
 session = cluster.connect()
 
 session.execute("CREATE KEYSPACE BOHistory WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 2 };")
-
 session.execute("CREATE TABLE bohistory.deals (dealid varchar primary key,client varchar,product varchar,quantity int,price double);")
 
 for i in range(1000):

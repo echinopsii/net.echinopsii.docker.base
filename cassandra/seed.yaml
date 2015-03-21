@@ -4,3 +4,4 @@ master:
     - CASSANDRA_TOKEN=-9223372036854775808
     - CASSANDRA_CLUSTERNAME=echinopsii
   net: host
+

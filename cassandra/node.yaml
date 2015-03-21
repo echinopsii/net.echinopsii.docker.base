@@ -5,6 +5,7 @@ slave1:
     - CASSANDRA_CLUSTERNAME=echinopsii
     - CASSANDRA_SEEDS=192.168.33.24
   net: host
+
 slave2:
   image: spotify/cassandra:cluster
   environment:
