@@ -3,7 +3,7 @@ FROM echinopsii/fedora.21.systemd
 MAINTAINER Mathilde Ffrench <mathilde.ffrench@echinopsii.net>
 
 RUN yum -y update && yum clean all
-RUN yum -y install pwgen wget erlang net-tools bind-utils && yum clean all
+RUN yum -y install pwgen wget erlang net-tools bind-utils python python-pip && yum clean all
 
 RUN wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.5.0/rabbitmq-server-3.5.0-1.noarch.rpm
 RUN rpm --import http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
@@ -16,7 +16,7 @@ ADD install/rabbitmq-server.service /usr/lib/systemd/system/
 
 RUN echo "rabbitmq-cluster" > /var/lib/rabbitmq/.erlang.cookie
 RUN chown rabbitmq.rabbitmq /var/lib/rabbitmq/.erlang.cookie
-RUN chmod 600 /var/lib/rabbitmq/.erlang.cookie
+RUN chmod 400 /var/lib/rabbitmq/.erlang.cookie
 
 RUN systemctl enable rabbitmq-server.service
 
@@ -26,5 +26,13 @@ EXPOSE 1833
 EXPOSE 61613
 EXPOSE 4369
 EXPOSE 44001
+
+RUN pip install Flask
+RUN curl -L https://raw.githubusercontent.com/echinopsii/net.echinopsii.rabbitmq-clu.radmin/master/rabbitmq-clu.radmin.py > /rabbitmq-clu.radmin.py
+
+ADD install/rabbitmq-clu.radmin.sh /
+RUN chmod 755 /rabbitmq-clu.radmin.sh
+ADD install/rabbitmq-clu.radmin.service /usr/lib/systemd/system/
+RUN systemctl enable rabbitmq-clu.radmin.service 
 
 CMD ["/usr/sbin/init"]
