@@ -3,7 +3,7 @@ FROM echinopsii/fedora.21.systemd
 MAINTAINER Mathilde Ffrench <mathilde.ffrench@echinopsii.net>
 
 RUN yum -y update && yum clean all
-RUN yum -y install pwgen wget erlang && yum clean all
+RUN yum -y install pwgen wget erlang net-tools bind-utils && yum clean all
 
 RUN wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.5.0/rabbitmq-server-3.5.0-1.noarch.rpm
 RUN rpm --import http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
