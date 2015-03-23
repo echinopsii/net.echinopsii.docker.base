@@ -15,6 +15,8 @@ ADD install/rabbitmq.config /etc/rabbitmq/
 ADD install/rabbitmq-server.service /usr/lib/systemd/system/
 
 RUN echo "rabbitmq-cluster" > /var/lib/rabbitmq/.erlang.cookie
+RUN chown rabbitmq.rabbitmq /var/lib/rabbitmq/.erlang.cookie
+RUN chmod 600 /var/lib/rabbitmq/.erlang.cookie
 
 RUN systemctl enable rabbitmq-server.service
 
