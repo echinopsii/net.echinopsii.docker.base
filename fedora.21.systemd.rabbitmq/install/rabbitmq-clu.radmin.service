@@ -1,0 +1,11 @@
+[Unit]
+Description=RabbitMQ Cluster REST admin service
+After=syslog.target network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/rabbitmq-clu.radmin.sh
+
+[Install]
+WantedBy=multi-user.target
