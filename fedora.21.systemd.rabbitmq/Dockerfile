@@ -35,4 +35,6 @@ RUN chmod 755 /rabbitmq-clu.radmin.sh
 ADD install/rabbitmq-clu.radmin.service /usr/lib/systemd/system/
 RUN systemctl enable rabbitmq-clu.radmin.service 
 
+EXPOSE 5000
+
 CMD ["/usr/sbin/init"]
