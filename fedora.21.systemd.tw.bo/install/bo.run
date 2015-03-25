@@ -1,0 +1,47 @@
+#!/bin/bash
+set -x
+MOM_CLI_IMPL="net.echinopsii.ariane.community.scenarios.commons.momcli.rabbitmq.Client"
+MOM_CLI_RBQ_PRODUCT="TradeworkflowDemo.BackOffice"
+MOM_CLI_RBQ_INFORMATION=${BO_SERVICE_NAME:-"BackOfficeService"}
+MOM_CLI_RBQ_COPYRIGHT="AGPLv3"
+MOM_CLI_RBQ_VERSION="0.3.0-SNAPSHOT"
+MOM_HOST_FQDN=${MOM_HOST}
+MOM_HOST_PORT=${MOM_PORT:-"5672"}
+CONTAINER_IP=`ifconfig | grep "inet" | grep "broadcast" | awk '{print $2}'`
+ARIANE_PGURL=${A_PGURL:-"jmx://${CONTAINER_IP}:9069"}
+ARIANE_OSI=${A_OSI}
+ARIANE_OTM=${A_OTM}
+ARIANE_APP=${A_APP:-"BackOfficeService"}
+ARIANE_CMP=${A_CMP:-"echinopsii"}
+BO_QUEUE=${BO_Q:-"BOQ"}
+
+if [ "${MOM_HOST_FQDN}" == "" ]; then
+    echo "Target RabbitMQ FQDN is not defined !"
+    return -1
+fi
+
+if [ ! -f /opt/ariane/tradeworkflow/distrib/conf/backoffice.properties.ini ]; then
+    cp /opt/ariane/tradeworkflow/distrib/conf/backoffice.properties /opt/ariane/tradeworkflow/distrib/conf/backoffice.properties.ini
+fi
+
+cp /opt/ariane/tradeworkflow/distrib/conf/backoffice.properties.ini /opt/ariane/tradeworkflow/distrib/conf/backoffice.properties
+
+sed -i "s/##mom_cli.impl/${MOM_CLI_IMPL}/g" /opt/ariane/tradeworkflow/distrib/conf/backoffice.properties
+sed -i "s/##mom_cli.rabbitmq.product/${MOM_CLI_RBQ_PRODUCT}/g" /opt/ariane/tradeworkflow/distrib/conf/backoffice.properties
+sed -i "s/##mom_cli.rabbitmq.information/${MOM_CLI_RBQ_INFORMATION}/g" /opt/ariane/tradeworkflow/distrib/conf/backoffice.properties
+sed -i "s/##mom_cli.rabbitmq.copyright/${MOM_CLI_RBQ_COPYRIGHT}/g" /opt/ariane/tradeworkflow/distrib/conf/backoffice.properties
+sed -i "s/##mom_cli.rabbitmq.version/${MOM_CLI_RBQ_VERSION}/g" /opt/ariane/tradeworkflow/distrib/conf/backoffice.properties
+sed -i "s/##mom_host.fqdn/${MOM_HOST_FQDN}/g" /opt/ariane/tradeworkflow/distrib/conf/backoffice.properties
+sed -i "s/##mom_host.port/${MOM_HOST_PORT}/g" /opt/ariane/tradeworkflow/distrib/conf/backoffice.properties
+sed -i "s@##ariane.pgurl@${ARIANE_PGURL}@g" /opt/ariane/tradeworkflow/distrib/conf/backoffice.properties
+sed -i "s/##ariane.osi/${ARIANE_OSI}/g" /opt/ariane/tradeworkflow/distrib/conf/backoffice.properties
+sed -i "s/##ariane.otm/${ARIANE_OTM}/g" /opt/ariane/tradeworkflow/distrib/conf/backoffice.properties
+sed -i "s/##ariane.app/${ARIANE_APP}/g" /opt/ariane/tradeworkflow/distrib/conf/backoffice.properties
+sed -i "s/##ariane.cmp/${ARIANE_CMP}/g" /opt/ariane/tradeworkflow/distrib/conf/backoffice.properties
+sed -i "s/##back_office.queue/${BO_QUEUE}/g" /opt/ariane/tradeworkflow/distrib/conf/backoffice.properties
+
+export JAVA_HOME=/opt/java/jdk1.7.0_75/
+export PATH=$JAVA_HOME/bin:$PATH
+
+/opt/ariane/tradeworkflow/distrib/bin/backoffice.sh
+set +x

@@ -1,0 +1,12 @@
+[Unit]
+Description=BackOffice Service
+After=syslog.target network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+EnvironmentFile=/bo.env
+ExecStart=/bo.run
+
+[Install]
+WantedBy=multi-user.target

@@ -1,9 +1,0 @@
-FROM echinopsii/fedora.21.systemd
-
-MAINTAINER Mathilde Ffrench <mffrench@echinopsii.net>
-
-RUN yum -y update && yum clean all
-RUN yum -y install pwgen wget logrotate rabbitmq-server && yum clean all
-RUN HOME=/ ; rabbitmq-plugins enable rabbitmq_management rabbitmq_management_visualiser	rabbitmq_mqtt rabbitmq_stomp rabbitmq_amqp1_0 rabbitmq_auth_backend_ldap rabbitmq_auth_mechanism_ssl rabbitmq_consistent_hash_exchange rabbitmq_federation rabbitmq_federation_management rabbitmq_jsonrpc rabbitmq_jsonrpc_channel rabbitmq_shovel rabbitmq_shovel_management rabbitmq_tracing rabbitmq_web_stomp sockjs
-
-CMD [“/usr/sbin/init”]
