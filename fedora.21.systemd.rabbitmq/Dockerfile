@@ -20,11 +20,6 @@ RUN chmod 400 /var/lib/rabbitmq/.erlang.cookie
 
 RUN systemctl enable rabbitmq-server.service
 
-RUN /etc/init.d/rabbitmq-server start
-RUN rabbitmqctl add_user guest guest
-RUN rabbitmqctl set_permissions guest ".*" ".*" ".*"
-RUN /etc/init.d/rabbitmq-server stop
-
 EXPOSE 5672
 EXPOSE 15672
 EXPOSE 1833
