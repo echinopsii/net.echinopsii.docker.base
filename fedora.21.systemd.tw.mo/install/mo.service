@@ -1,0 +1,12 @@
+[Unit]
+Description=MiddleOffice Service
+After=syslog.target network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+EnvironmentFile=/mo.env
+ExecStart=/mo.run
+
+[Install]
+WantedBy=multi-user.target
