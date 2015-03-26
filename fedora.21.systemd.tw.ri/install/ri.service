@@ -1,0 +1,12 @@
+[Unit]
+Description=Risk Service
+After=syslog.target network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+EnvironmentFile=/ri.env
+ExecStart=/ri.run
+
+[Install]
+WantedBy=multi-user.target
