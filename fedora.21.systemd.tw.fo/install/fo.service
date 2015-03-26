@@ -1,0 +1,12 @@
+[Unit]
+Description=FrontOffice Service
+After=syslog.target network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+EnvironmentFile=/fo.env
+ExecStart=/fo.run
+
+[Install]
+WantedBy=multi-user.target
