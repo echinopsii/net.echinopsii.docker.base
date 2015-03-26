@@ -1,0 +1,48 @@
+#!/bin/bash
+
+MOM_CLI_IMPL="net.echinopsii.ariane.community.scenarios.commons.momcli.rabbitmq.Client"
+MOM_CLI_RBQ_PRODUCT="TradeworkflowDemo.Feeder"
+MOM_CLI_RBQ_INFORMATION=${FD_SERVICE_NAME:-"FeederService"}
+MOM_CLI_RBQ_COPYRIGHT="AGPLv3"
+MOM_CLI_RBQ_VERSION="0.3.0-SNAPSHOT"
+MOM_HOST_FQDN=${MOM_HOST}
+MOM_HOST_PORT=${MOM_PORT:-"5672"}
+CONTAINER_IP=`ifconfig | grep "inet" | grep "broadcast" | awk '{print $2}'`
+ARIANE_PGURL=${A_PGURL:-"jmx://${CONTAINER_IP}:9069"}
+ARIANE_OSI=${A_OSI}
+ARIANE_OTM=${A_OTM}
+ARIANE_APP=${A_APP:-"FeederService"}
+ARIANE_CMP=${A_CMP:-"echinopsii"}
+FD_BASE_TOPIC=${FD_BTOPIC:-"PRICE"}
+FD_STOCKS_LIST=${FD_SLIST:-"stock_a,stock_b,stock_c,stock_d,stock_e,stock_f,stock_g,stock_h,stock_i,stock_j,stock_k"}
+
+if [ "${MOM_HOST_FQDN}" == "" ]; then
+    echo "Target RabbitMQ FQDN is not defined !"
+    return -1
+fi
+
+if [ ! -f /opt/ariane/tradeworkflow/distrib/conf/feeder.properties.ini ]; then
+    cp /opt/ariane/tradeworkflow/distrib/conf/feeder.properties /opt/ariane/tradeworkflow/distrib/conf/feeder.properties.ini
+fi
+
+cp /opt/ariane/tradeworkflow/distrib/conf/feeder.properties.ini /opt/ariane/tradeworkflow/distrib/conf/feeder.properties
+
+sed -i "s/##mom_cli.impl/${MOM_CLI_IMPL}/g" /opt/ariane/tradeworkflow/distrib/conf/feeder.properties
+sed -i "s/##mom_cli.rabbitmq.product/${MOM_CLI_RBQ_PRODUCT}/g" /opt/ariane/tradeworkflow/distrib/conf/feeder.properties
+sed -i "s/##mom_cli.rabbitmq.information/${MOM_CLI_RBQ_INFORMATION}/g" /opt/ariane/tradeworkflow/distrib/conf/feeder.properties
+sed -i "s/##mom_cli.rabbitmq.copyright/${MOM_CLI_RBQ_COPYRIGHT}/g" /opt/ariane/tradeworkflow/distrib/conf/feeder.properties
+sed -i "s/##mom_cli.rabbitmq.version/${MOM_CLI_RBQ_VERSION}/g" /opt/ariane/tradeworkflow/distrib/conf/feeder.properties
+sed -i "s/##mom_host.fqdn/${MOM_HOST_FQDN}/g" /opt/ariane/tradeworkflow/distrib/conf/feeder.properties
+sed -i "s/##mom_host.port/${MOM_HOST_PORT}/g" /opt/ariane/tradeworkflow/distrib/conf/feeder.properties
+sed -i "s@##ariane.pgurl@${ARIANE_PGURL}@g" /opt/ariane/tradeworkflow/distrib/conf/feeder.properties
+sed -i "s/##ariane.osi/${ARIANE_OSI}/g" /opt/ariane/tradeworkflow/distrib/conf/feeder.properties
+sed -i "s/##ariane.otm/${ARIANE_OTM}/g" /opt/ariane/tradeworkflow/distrib/conf/feeder.properties
+sed -i "s/##ariane.app/${ARIANE_APP}/g" /opt/ariane/tradeworkflow/distrib/conf/feeder.properties
+sed -i "s/##ariane.cmp/${ARIANE_CMP}/g" /opt/ariane/tradeworkflow/distrib/conf/feeder.properties
+sed -i "s/##feeder.base_topic/${FD_BASE_TOPIC}/g" /opt/ariane/tradeworkflow/distrib/conf/feeder.properties
+sed -i "s/##feeder.stocks_list/${FD_STOCKS_LIST}/g" /opt/ariane/tradeworkflow/distrib/conf/feeder.properties
+
+export JAVA_HOME=/opt/java/jdk1.7.0_75/
+export PATH=$JAVA_HOME/bin:$PATH
+
+/opt/ariane/tradeworkflow/distrib/bin/feeder.sh
