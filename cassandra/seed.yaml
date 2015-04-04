@@ -1,7 +1,0 @@
-master:
-  image: spotify/cassandra:cluster
-  environment:
-    - CASSANDRA_TOKEN=-9223372036854775808
-    - CASSANDRA_CLUSTERNAME=echinopsii
-  net: host
-
