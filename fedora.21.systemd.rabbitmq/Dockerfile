@@ -8,7 +8,8 @@ RUN yum -y install pwgen wget erlang net-tools bind-utils python python-pip && y
 RUN wget https://www.rabbitmq.com/releases/rabbitmq-server/v3.3.5/rabbitmq-server-3.3.5-1.noarch.rpm
 #RUN wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.5.0/rabbitmq-server-3.5.0-1.noarch.rpm
 RUN rpm --import http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
-RUN yum -y install rabbitmq-server-3.5.0-1.noarch.rpm
+#RUN yum -y install rabbitmq-server-3.5.0-1.noarch.rpm
+RUN yum -y install rabbitmq-server-3.3.5-1.noarch.rpm
 
 RUN rabbitmq-plugins enable amqp_client mochiweb webmachine rabbitmq_amqp1_0 rabbitmq_web_dispatch rabbitmq_management_agent rabbitmq_management rabbitmq_management_visualiser rabbitmq_federation rabbitmq_federation_management rabbitmq_mqtt rabbitmq_shovel rabbitmq_shovel_management rabbitmq_stomp rabbitmq_test rabbitmq_tracing
 
