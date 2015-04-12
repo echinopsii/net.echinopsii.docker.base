@@ -1,0 +1,40 @@
+master:
+  image: echinopsii/cassandra:cluster
+  environment:
+    - CASSANDRA_TOKEN=-9223372036854775808
+    - CASSANDRA_CLUSTERNAME=echinopsii
+    - CASSANDRA_BROADCAST_ADDRESS
+  ports:
+    - "7000:7000"
+    - "7001:7001"
+    - "7199:7199"
+    - "9042:9042"
+    - "9160:9160"
+
+slave1:
+  image: echinopsii/cassandra:cluster
+  environment:
+    - CASSANDRA_TOKEN=-3074457345618258603
+    - CASSANDRA_CLUSTERNAME=echinopsii
+    - CASSANDRA_SEEDS
+    - CASSANDRA_BROADCAST_ADDRESS
+  ports:
+    - "7000:7000"
+    - "7001:7001"
+    - "7199:7199"
+    - "9042:9042"
+    - "9160:9160"
+
+slave2:
+  image: echinopsii/cassandra:cluster
+  environment:
+    - CASSANDRA_TOKEN=3074457345618258602
+    - CASSANDRA_CLUSTERNAME=echinopsii
+    - CASSANDRA_SEEDS
+    - CASSANDRA_BROADCAST_ADDRESS
+  ports:
+    - "7000:7000"
+    - "7001:7001"
+    - "7199:7199"
+    - "9042:9042"
+    - "9160:9160"
