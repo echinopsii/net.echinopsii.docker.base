@@ -1,0 +1,32 @@
+Docker container to build ariane core and plugins
+
+/ECHINOPSII must be mounted with the distrib repository
+/root must be mounted to generate (or reuse) .m2 and output zipped files
+
+** Example
+
+docker run --rm \
+    -v /ECHINOPSII:/ECHINOPSII:rw \
+    -v /BUILDHOME:/root:rw \
+    echinopsii/ariane.buildenv \
+    /ECHINOPSII/ariane.community.distrib/distribManager.py distpkgr master.SNAPSHOT
+
+docker run --rm \
+    -v /ECHINOPSII:/ECHINOPSII:rw \
+    -v /BUILDHOME:/root:rw echinopsii/ariane.buildenv \
+    /ECHINOPSII/ariane.community.distrib/distribManager.py pluginpkgr ariane.community.plugin.rabbitmq master.SNAPSHOT master.SNAPSHOT
+
+
+*** For the enterprise we need an interactive tty for the stash password
+
+docker run --rm -t -i \
+    -v /ECHINOPSII:/ECHINOPSII:rw \
+    -v /BUILDHOME:/root:rw \
+    echinopsii/ariane.buildenv \
+    /ECHINOPSII/ariane.enterprise.distrib/distribManager.py distpkgr lbernail master.SNAPSHOT
+
+docker run --rm -t -i \
+    -v /ECHINOPSII:/ECHINOPSII:rw \
+    -v /BUILDHOME:/root:rw echinopsii/ariane.buildenv \
+    /ECHINOPSII/ariane.enterprise.distrib/distribManager.py pluginpkgr lbernail ariane.enterprise.plugin.tibco.rv master.SNAPSHOT master.SNAPSHOT
+    
