@@ -52,6 +52,7 @@ if [ "$1" = 'supervisord' ]; then
                 rabbitmqctl add_user $RABBITMQ_USER $RABBITMQ_PASSWORD
 
                 if [ "$RABBITMQ_VHOST" ]; then
+                    rabbitmqctl set_permissions -p $RABBITMQ_VHOST admin ".*" ".*" ".*"
                     rabbitmqctl set_permissions -p $RABBITMQ_VHOST $RABBITMQ_USER ".*" ".*" ".*"
                 fi
             fi
