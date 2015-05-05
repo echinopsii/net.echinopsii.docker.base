@@ -1,7 +1,22 @@
 Docker container to build ariane core and plugins
 
-/ECHINOPSII must be mounted with an already cloned distrib repo
-  * All other repositories will be cloned in this dir
+** Build **
+
+Edit the Dockerfile and edit the following line to fit you user definition : 
+
+RUN groupadd -g <GID> <USERGROUPNAME> && useradd -m -s /bin/bash -u <UID> -g <GID> <USERNAME>
+USER <USERNAME>
+
+Then : 
+
+sudo docker build -t echinopsii/ariane.buildenv:<USERNAME> .
+
+%----%----%----%----%----%----%----%----%----%----%----%----%----%----%----%----%----%----%----%----
+
+** Run **
+
+/ECHINOPSII must be mounted
+  * Ariane repositories will be cloned in this dir
   * zip files will be generated in the artifacts subdirectory of this dir
   * You can change this directory to another one (you need to change the -v option as well as the docker cmd)
 
@@ -9,39 +24,17 @@ Docker container to build ariane core and plugins
   * to avoid redownloading dependencies at each build
   * to provide an .m2/settings.xml with nexus credentials (necessary for enterprise builds)
 
-** Examples
 
-docker run --rm \
-    -v /HOSTHOME/dev/ECHINOPSII:/ECHINOPSII:rw \
-    -v /HOSTHOME/.m2:/root/.m2:rw \
-    echinopsii/ariane.buildenv \
-    /ECHINOPSII/ariane.community.distrib/distribManager.py -s https://hooks.slack.com/services/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 \
-        distpkgr master.SNAPSHOT
+** Example
 
-docker run --rm \
-    -v /HOSTHOME/dev/ECHINOPSII:/ECHINOPSII:rw \
-    -v /HOSTHOME/.m2:/root/.m2:rw \
-    echinopsii/ariane.buildenv \
-    /ECHINOPSII/ariane.community.distrib/distribManager.py -s https://hooks.slack.com/services/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 \
-        pluginpkgr ariane.community.plugin.rabbitmq master.SNAPSHOT master.SNAPSHOT
+sudo docker run --rm \
+     --privileged=true \ #IF SELINUX
+     -e ARIANE_DISTRIB_ARGS="distpkgr master.SNAPSHOT" \
+     -v /ECHINOPSII/DEV:/ECHINOPSII:rw -v /home/mffrench/.m2:/home/mffrench/.m2:rw \
+     echinopsii/ariane.buildenv:<USERNAME>
 
-
-*** For the enterprise we need a user and password, you can either:
-  * specify the user on the command line and enter the password interactively with the tty (you will need to docker with -t -i)
-  * specify user:password in the user field for non-interactive builds
-First example goes with interactive and second with automated
-
-docker run --rm -t -i \
-    -v /HOSTHOME/dev/ECHINOPSII:/ECHINOPSII:rw \
-    -v /HOSTHOME/.m2:/root/.m2:rw \
-    echinopsii/ariane.buildenv \
-    /ECHINOPSII/ariane.enterprise.distrib/distribManager.py -s https://hooks.slack.com/services/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 \
-        distpkgr lbernail master.SNAPSHOT
-
-docker run --rm \
-    -v /HOSTHOME/dev/ECHINOPSII:/ECHINOPSII:rw \
-    -v /HOSTHOME/.m2:/root/.m2:rw \
-    echinopsii/ariane.buildenv \
-    /ECHINOPSII/ariane.enterprise.distrib/distribManager.py -s https://hooks.slack.com/services/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 \
-        pluginpkgr jenkins:YHN444rty ariane.enterprise.plugin.tibco.rv master.SNAPSHOT master.SNAPSHOT
-    
+sudo docker run --rm \ 
+     --privileged=true \ #IF SELINUX
+     -e ARIANE_DISTRIB_ARGS="pluginpkgr ariane.community.plugin.rabbitmq master.SNAPSHOT master.SNAPSHOT" \
+     -v /ECHINOPSII/DEV:/ECHINOPSII:rw -v /home/mffrench/.m2:/home/mffrench/.m2:rw \
+     echinopsii/ariane.buildenv:<USERNAME>
