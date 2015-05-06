@@ -12,6 +12,36 @@ if [ $? -ne 0 ]; then
 	exit 1
 fi
 
+sysname=`uname -a` > /dev/null
+echo $sysname | grep Linux > /dev/null
+if [ $? -eq 0 ]; then
+	nbCpu=`more /proc/cpuinfo | grep processor | wc -l`
+	if [[ "$nbCpu" -lt 4 ]]; then
+		echo "This system has ${nbCpu} CPUs. It is advised to not run this script if you have less than 4 CPUs."
+		echo "Do you want to continue ? (Y|N - default)"
+		read continue
+		if [ "${read}" != "Y" ]; then
+			exit 0
+		fi
+	fi
+else
+	echo $sysname | grep Darwin > /dev/null
+	if [ $? -eq 0 ]; then
+		nbCpu=`sysctl hw.ncpu | awk '{print $2}'`
+		if [[ "$nbCpu" -lt 4 ]]; then
+			echo "This system has ${nbCpu} CPUs. It is advised to not run this script if you have less than 4 CPUs."
+		        echo "Do you want to continue ? (Y|N - default)"
+	        	read continue
+		        if [ "${read}" != "Y" ]; then
+		                exit 0
+	        	fi
+		fi
+	else
+		echo "Ariane is tested against Linux and Darwin only"
+		exit 1
+	fi
+fi
+
 if [ $# -ne 2 ]; then
 	echo "Usage: $0 [LOCAL ARIANE SOURCE DIRECTORY PATH] [VERSION]"
 	exit 1
