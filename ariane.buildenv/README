@@ -1,28 +1,48 @@
 Docker container to build ariane core and plugins
 
-** Build **
+* Build
 
-Edit the Dockerfile and edit the following line to fit you user definition : 
+sudo docker build -t echinopsii/ariane.buildenv .
 
-RUN groupadd -g <GID> <USERGROUPNAME> && useradd -m -s /bin/bash -u <UID> -g <GID> <USERNAME>
-USER <USERNAME>
 
-Then : 
+* Run 
 
-sudo docker build -t echinopsii/ariane.buildenv:<USERNAME> .
+An helper script is provided here : https://github.com/echinopsii/net.echinopsii.docker.base/tree/master/ariane.buildenv/run.sh
 
-%----%----%----%----%----%----%----%----%----%----%----%----%----%----%----%----%----%----%----%----
+```
+$ ./run.sh  
+Usage : ./run.sh [LOCAL ARIANE SOURCE DIR] [DISTRIB COMMAND]
+```
 
-** Run **
+** Example 
+
+```
+./run.sh /ECHINOPSII/DEV -h
+```
+
+```
+./run.sh /ECHINOPSII/DEV "ditpkgr master.SNAPSHOT"
+```
+
+```
+./run.sh /ECHINOPSII/DEV "pluginpkgr ariane.community.plugin.rabbitmq master.SNAPSHOT master.SNAPSHOT"
+```
+
+
+
+
+
+
+
+
+
 
 /ECHINOPSII must be mounted
   * Ariane repositories will be cloned in this dir
   * zip files will be generated in the artifacts subdirectory of this dir
   * You can change this directory to another one (you need to change the -v option as well as the docker cmd)
 
-/root/.m2 can also be mounted
-  * to avoid redownloading dependencies at each build
-  * to provide an .m2/settings.xml with nexus credentials (necessary for enterprise builds)
+$HOME/.m2 can also be mountedito avoid redownloading dependencies at each build
 
 
 ** Example

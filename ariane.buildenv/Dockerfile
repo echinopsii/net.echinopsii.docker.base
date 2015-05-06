@@ -38,7 +38,4 @@ ENV PATH /opt/java/bin:/opt/maven/bin:$PATH
 ENV ARIANE_SOURCE_DIR /ECHINOPSII
 ADD script/arianeBuildEnv.sh /
 
-RUN groupadd -g <GID> <USERGROUPNAME> && useradd -m -s /bin/bash -u <UID> -g <GID> <USERNAME>
-USER <USERNAME>
-
 CMD /arianeBuildEnv.sh
