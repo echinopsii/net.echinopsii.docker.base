@@ -85,4 +85,5 @@ sudo docker build -t echinopsii/ariane.community:${ARIANE_VERS} .
 
 rm -rf ariane*
 
+sudo $dockerComposePath up -d --no-recreate
 
