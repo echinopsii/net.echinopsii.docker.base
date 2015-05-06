@@ -27,34 +27,3 @@ Usage : ./run.sh [LOCAL ARIANE SOURCE DIR] [DISTRIB COMMAND]
 ```
 ./run.sh /ECHINOPSII/DEV "pluginpkgr ariane.community.plugin.rabbitmq master.SNAPSHOT master.SNAPSHOT"
 ```
-
-
-
-
-
-
-
-
-
-
-/ECHINOPSII must be mounted
-  * Ariane repositories will be cloned in this dir
-  * zip files will be generated in the artifacts subdirectory of this dir
-  * You can change this directory to another one (you need to change the -v option as well as the docker cmd)
-
-$HOME/.m2 can also be mountedito avoid redownloading dependencies at each build
-
-
-** Example
-
-sudo docker run --rm \
-     --privileged=true \ #IF SELINUX
-     -e ARIANE_DISTRIB_ARGS="distpkgr master.SNAPSHOT" \
-     -v /ECHINOPSII/DEV:/ECHINOPSII:rw -v /home/mffrench/.m2:/home/mffrench/.m2:rw \
-     echinopsii/ariane.buildenv:<USERNAME>
-
-sudo docker run --rm \ 
-     --privileged=true \ #IF SELINUX
-     -e ARIANE_DISTRIB_ARGS="pluginpkgr ariane.community.plugin.rabbitmq master.SNAPSHOT master.SNAPSHOT" \
-     -v /ECHINOPSII/DEV:/ECHINOPSII:rw -v /home/mffrench/.m2:/home/mffrench/.m2:rw \
-     echinopsii/ariane.buildenv:<USERNAME>
