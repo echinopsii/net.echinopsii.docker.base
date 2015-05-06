@@ -36,6 +36,8 @@ ENV JAVA_HOME /opt/java
 ENV PATH /opt/java/bin:/opt/maven/bin:$PATH
 
 ENV ARIANE_SOURCE_DIR /ECHINOPSII
-ADD script/arianeBuildEnv.sh /
+ADD script/docker-entrypoint.sh /
 
-CMD /arianeBuildEnv.sh
+ENTRYPOINT ["/docker-entrypoint.sh"]
+#CMD ["/docker-entrypoint.sh"]
+CMD ["-h"]
