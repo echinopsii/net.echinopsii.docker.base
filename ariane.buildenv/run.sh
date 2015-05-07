@@ -15,13 +15,17 @@ echo "" >> ~/.ariane.buildenv.properties
 echo "USER_NAME=${USER}" >> ~/.ariane.buildenv.properties
 echo "UID=${UID}" >> ~/.ariane.buildenv.properties
 
-if [ $# -ne 2 ]; then
+if [ $# -ne 2 ] && [ $# -ne 3 ]; then
 	echo "Usage : $0 [LOCAL ARIANE SOURCE DIR] [DISTRIB COMMAND]"
 	exit -1
 fi
 
+M2PATH="$HOME/.m2"
+if [ $# -eq 3 ]; then
+        M2PATH=$3
+fi
+
 sudo docker run --rm --privileged=true -e ARIANE_DISTRIB_ARGS="$2" \
-                -v $1:/ECHINOPSII:rw -v $HOME/.m2:$HOME/.m2:rw \
+                -v $1:/ECHINOPSII:rw -v $M2PATH:$HOME/.m2:rw \
                 -v $HOME/.ariane.buildenv.properties:/ariane.buildenv.properties \
                 echinopsii/ariane.buildenv
-
