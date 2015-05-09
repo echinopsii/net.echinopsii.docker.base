@@ -13,7 +13,7 @@ echo "GID=`getent group ${USER_GROUP_NAME}|cut -d: -f3`" >> ~/.ariane.buildenv.p
 echo "" >> ~/.ariane.buildenv.properties
 
 echo "USER_NAME=${USER}" >> ~/.ariane.buildenv.properties
-echo "UID=${UID}" >> ~/.ariane.buildenv.properties
+echo "UID=`getent passwd ${USER}|cut -d: -f3`" >> ~/.ariane.buildenv.properties
 
 if [ $# -ne 2 ] && [ $# -ne 3 ]; then
 	echo "Usage : $0 [LOCAL ARIANE SOURCE DIR] [DISTRIB COMMAND]"
