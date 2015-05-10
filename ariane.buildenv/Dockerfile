@@ -34,3 +34,8 @@ RUN ln -s /usr/local/bin/python3 /usr/bin
 
 ENV JAVA_HOME /opt/java
 ENV PATH /opt/java/bin:/opt/maven/bin:$PATH
+
+ENV ARIANE_SOURCE_DIR /ECHINOPSII
+ADD script/arianeBuildEnv.sh /
+
+CMD /arianeBuildEnv.sh
