@@ -15,7 +15,7 @@ ENV JAVA_HOME /opt/java/jdk1.7.0_75
 ENV PATH $JAVA_HOME/bin:$PATH
 
 RUN mkdir -p /opt/ariane/tradeworkflow
-RUN curl -L http://nexus.echinopsii.net/nexus/service/local/repositories/echinopsii.community.snapshots/content/net/echinopsii/ariane/community/scenarios/net.echinopsii.ariane.community.scenarios.distrib/0.3.0-SNAPSHOT/net.echinopsii.ariane.community.scenarios.distrib-0.3.0-20150325.165846-2.zip > net.echinopsii.ariane.community.scenarios.distrib-0.3.0-SNAPSHOT.zip
+RUN curl -L http://nexus.echinopsii.net/nexus/content/groups/public/net/echinopsii/ariane/community/scenarios/net.echinopsii.ariane.community.scenarios.distrib/0.3.0-SNAPSHOT/net.echinopsii.ariane.community.scenarios.distrib-0.3.0-20150717.113701-1.zip > net.echinopsii.ariane.community.scenarios.distrib-0.3.0-SNAPSHOT.zip
 RUN unzip net.echinopsii.ariane.community.scenarios.distrib-0.3.0-SNAPSHOT.zip
 RUN mv net.echinopsii.ariane.community.scenarios.distrib-0.3.0-SNAPSHOT/distrib /opt/ariane/tradeworkflow/
 RUN rm net.echinopsii.ariane.community.scenarios.distrib-0.3.0-SNAPSHOT.zip
