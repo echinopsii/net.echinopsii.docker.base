@@ -1,6 +1,6 @@
 #!/bin/bash
 set -x
-MOM_CLI_IMPL="net.echinopsii.ariane.community.scenarios.commons.momcli.rabbitmq.Client"
+MOM_CLI_IMPL="net.echinopsii.ariane.community.messaging.rabbitmq.Client"
 MOM_CLI_RBQ_PRODUCT="TradeworkflowDemo.BackOffice"
 MOM_CLI_RBQ_INFORMATION=${BO_SERVICE_NAME:-"BackOfficeService"}
 MOM_CLI_RBQ_COPYRIGHT="AGPLv3"

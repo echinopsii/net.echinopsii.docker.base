@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MOM_CLI_IMPL="net.echinopsii.ariane.community.scenarios.commons.momcli.rabbitmq.Client"
+MOM_CLI_IMPL="net.echinopsii.ariane.community.messaging.rabbitmq.Client"
 MOM_CLI_RBQ_PRODUCT="TradeworkflowDemo.Feeder"
 MOM_CLI_RBQ_INFORMATION=${FD_SERVICE_NAME:-"FeederService"}
 MOM_CLI_RBQ_COPYRIGHT="AGPLv3"
