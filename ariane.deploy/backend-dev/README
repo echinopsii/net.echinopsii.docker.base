@@ -1,0 +1,8 @@
+## Create all services
+docker-compose up -d --no-recreate
+
+## Stop all services
+docker-compose stop
+
+## Start all services
+docker-compose start
