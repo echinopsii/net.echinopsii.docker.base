@@ -10,7 +10,7 @@ services:
     environment:
       - NEO4J_SERVER_ID=1
     ports:
-      - 7474:7474
+      - 17474:7474
 
   neo4j2:
     image: neo4j:enterprise
@@ -21,7 +21,7 @@ services:
     environment:
       - NEO4J_SERVER_ID=2
     ports:
-      - 17474:7474
+      - 27474:7474
 
 
 networks:

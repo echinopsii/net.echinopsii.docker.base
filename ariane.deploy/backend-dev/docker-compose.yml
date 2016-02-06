@@ -8,6 +8,7 @@ idmvol:
         - /var/lib/mysql
 directorydb:
     image: mariadb
+    hostname: directorydb
     volumes_from:
         - directoryvol
     environment: 
@@ -19,6 +20,7 @@ directorydb:
         - 3326:3306
 idmdb:
     image: mariadb
+    hostname: idmdb
     volumes_from:
         - idmvol
     environment: 
