@@ -35,14 +35,14 @@ services:
       - 37474:7474
 
   lb:
-    image: haproxy
+    image: janeczku/alpine-haproxy
     networks:
       - front
       - cluster
     ports:
       - 8080:7474
     volumes:
-      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+      - ./haproxy.cfg:/etc/haproxy/haproxy.cfg
 
 networks:
   cluster:
