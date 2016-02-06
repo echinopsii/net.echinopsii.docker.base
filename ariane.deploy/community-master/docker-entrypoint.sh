@@ -63,7 +63,7 @@ if [ "$1" = 'startup.sh' ]; then
 
         echo
         echo "Installing plugins"
-		if [ "$ARIANE_PLUGINS" ]; then
+	if [ "$ARIANE_PLUGINS" ]; then
             for plugin in $(echo $ARIANE_PLUGINS | tr ':' ' ')
             do
                 echo "Installing plugin $plugin"
@@ -72,7 +72,7 @@ if [ "$1" = 'startup.sh' ]; then
         fi
 
         echo "Configuring core and plugins"
-        $ARIANE_HOME/ariane/installer/virgoInstaller.py $ARIANE_HOME -a
+        $ARIANE_HOME/ariane/installer/virgoInstaller.py $ARIANE_HOME -a > /installer.log
 
         echo "Waiting for virgo to shutdown properly"
         sleep 30

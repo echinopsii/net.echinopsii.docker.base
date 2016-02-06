@@ -16,7 +16,7 @@ sysname=`uname -a` > /dev/null
 echo $sysname | grep Linux > /dev/null
 if [ $? -eq 0 ]; then
 	nbCpu=`more /proc/cpuinfo | grep processor | wc -l`
-	if [[ "$nbCpu" -lt 4 ]]; then
+	if [ "$nbCpu" -lt 4 ]; then
 		echo "This system has ${nbCpu} CPUs. It is advised to not run this script if you have less than 4 CPUs."
 		echo "Do you want to continue ? (Y|N - default)"
 		read continue
@@ -42,12 +42,13 @@ if [ ${ARIANE_VERS} = "master" ]; then
 fi
 
 USER_GROUP_NAME=`groups|awk '{print $1}'`
-echo "USER_GROUP_NAME=${USER_GROUP_NAME}" >> ~/.ariane.buildenv.properties
+echo "USER_GROUP_NAME=${USER_GROUP_NAME}" > ~/.ariane.buildenv.properties
 echo "GID=`getent group ${USER_GROUP_NAME}|cut -d: -f3`" >> ~/.ariane.buildenv.properties
+#echo "GID=${GID}" >> ~/.ariane.buildenv.properties
 echo "" >> ~/.ariane.buildenv.properties
 
 echo "USER_NAME=${USER}" >> ~/.ariane.buildenv.properties
-echo "UID=${UID}" >> ~/.ariane.buildenv.properties
+echo "UID=`id -u $USER_NAME`" >> ~/.ariane.buildenv.properties
 
 sudo docker run --rm --privileged=true -e ARIANE_DISTRIB_ARGS="distpkgr ${ARIANE_VERS2}" \
                 -v $1:/ECHINOPSII:rw -v $HOME/.m2:$HOME/.m2:rw \
@@ -59,6 +60,11 @@ if [ ${ARIANE_VERS} = "master" ]; then
         	        -v $1:/ECHINOPSII:rw -v $HOME/.m2:$HOME/.m2:rw \
 	                -v $HOME/.ariane.buildenv.properties:/ariane.buildenv.properties \
         	        echinopsii/ariane.buildenv
+	sudo docker run --rm --privileged=true -e ARIANE_DISTRIB_ARGS="pluginpkgr ariane.community.plugin.procos ${ARIANE_VERS2} ${ARIANE_VERS2}" \
+                        -v $1:/ECHINOPSII:rw -v $HOME/.m2:$HOME/.m2:rw \
+                        -v $HOME/.ariane.buildenv.properties:/ariane.buildenv.properties \
+                        echinopsii/ariane.buildenv
+
 fi
 
 cd community-${ARIANE_VERS}

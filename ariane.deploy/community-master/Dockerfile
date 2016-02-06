@@ -23,7 +23,8 @@ RUN set -x && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 COPY ariane.community.distrib-master.SNAPSHOT /opt/ariane
-COPY ariane.community.plugin.rabbitmq-master.SNAPSHOT.zip /opt/ariane.community.plugin.rabbitmq-master.SNAPSHOT.zip
+COPY ariane.community.plugin.rabbitmq-master.SNAPSHOT.zip /opt/plugin.rabbitmq.zip
+COPY ariane.community.plugin.procos-master.SNAPSHOT.zip /opt/plugin.procos.zip
 
 ENV JAVA_HOME /opt/java
 ENV PATH /opt/java/bin:/opt/ariane/bin:$PATH

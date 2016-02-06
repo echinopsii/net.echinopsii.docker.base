@@ -15,8 +15,8 @@ directorydb:
         - MYSQL_USER=ariane
         - MYSQL_PASSWORD=password
         - MYSQL_DATABASE=ariane_directory
-    expose:
-        - 3306
+    ports:
+        - 3326:3306
 idmdb:
     image: mariadb
     volumes_from:
@@ -26,32 +26,15 @@ idmdb:
         - MYSQL_USER=ariane
         - MYSQL_PASSWORD=password
         - MYSQL_DATABASE=ariane_idm
-    expose:
-        - 3306
+    ports:
+        - 3316:3306
 rabbitmq:
     image: echinopsii/rabbitmq:3.3.5
     environment:
         - RABBITMQ_ADMIN_PASSWORD=admin
         - RABBITMQ_VHOST=/ariane
         - RABBITMQ_USER=ariane
-        - RABBITMQ_PASSWORD=ariane
-    expose:
-        - 5672
+        - RABBITMQ_PASSWORD=password
     ports:
+        - 5672:5672
         - 15672:15672
-ariane:
-    image: echinopsii/ariane.community:master
-    environment:
-        - ARIANE_DIRECTORY_HOST=directorydb
-        - ARIANE_IDM_HOST=idmdb
-        - ARIANE_PLUGINS=rabbitmq:procos
-        - ARIANE_RABBITMQ_HOST=rabbitmq
-        - ARIANE_RABBITMQ_VHOST=/ariane
-        - ARIANE_RABBITMQ_USER=ariane
-        - ARIANE_RABBITMQ_PASSWORD=ariane
-    ports:
-        - 6969:6969
-    links:
-        - directorydb
-        - idmdb
-        - rabbitmq
