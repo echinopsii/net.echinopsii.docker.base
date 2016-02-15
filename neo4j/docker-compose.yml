@@ -41,8 +41,18 @@ services:
       - cluster
     ports:
       - 8080:7474
+    environment:
+      - LOGGER=logger
+      - NEO1=neo4j1
+      - NEO2=neo4j2
+      - NEO3=neo4j3
     volumes:
       - ./haproxy.cfg:/etc/haproxy/haproxy.cfg
+
+  logger:
+    image: lbernail/rsyslog:udp
+    networks:
+      - cluster
 
 networks:
   cluster:
