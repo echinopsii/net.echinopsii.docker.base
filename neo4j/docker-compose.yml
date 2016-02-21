@@ -50,7 +50,7 @@ services:
       - ./haproxy.cfg:/etc/haproxy/haproxy.cfg
 
   logger:
-    image: lbernail/rsyslog:udp
+    image: echinopsii/rsyslog:udp
     networks:
       - cluster
 
