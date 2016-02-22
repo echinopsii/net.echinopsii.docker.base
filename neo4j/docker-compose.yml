@@ -46,8 +46,10 @@ services:
       - NEO1=neo4j1
       - NEO2=neo4j2
       - NEO3=neo4j3
+      - BASIC_AUTH=bmVvNGo6YWRtaW4=
+      - LOGHOST=haproxy
     volumes:
-      - ./haproxy.cfg:/etc/haproxy/haproxy.cfg
+      - ./haproxy:/etc/haproxy
 
   logger:
     image: echinopsii/rsyslog:udp
