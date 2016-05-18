@@ -23,3 +23,4 @@ mysql -u ariane --password=password -h 127.0.0.1 -P 3316 -D ariane_idm < $ARIANE
 
 mysql -u ariane --password=password -h 127.0.0.1 -P 3316 -D ariane_idm < $ARIANE_PROJECT_PATH/ariane.community.plugin.docker/distrib/installer/resources/sqlscripts/plugins/docker/idm_plugin_docker_insert.sql 
 
+mysql -u ariane --password=password -h 127.0.0.1 -P 3326 -D ariane_directory < ./ariane_directory.sql
