@@ -55,7 +55,7 @@ idmdb:
     ports:
         - 3316:3306
 rabbitmq:
-    hostname: rabbitmq
+    hostname: arianebus_1
     image: echinopsii/rabbitmq:3.3.5
     environment:
         - RABBITMQ_ADMIN_PASSWORD=admin
