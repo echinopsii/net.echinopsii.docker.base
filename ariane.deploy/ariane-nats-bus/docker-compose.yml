@@ -1,0 +1,25 @@
+nats:
+    hostname: ariane_nats_bus_1
+    image: nats
+    entrypoint: 
+        - /gnatsd 
+        - -c 
+        - /gnatsd.conf 
+        - --user 
+        - ariane 
+        - --pass 
+        - password
+    environment:
+        - ARIANE_OS_TYPE_NAME=Linux Debian 8
+        - ARIANE_OS_TYPE_ARCHITECTURE=x86_64
+        - ARIANE_OS_TYPE_SUPPORTING_COMPANY_NAME=Debian
+        - ARIANE_OS_TYPE_SUPPORTING_COMPANY_DESCRIPTION=Debian Community
+        - ARIANE_TEAM_NAME=ARdev
+        - ARIANE_TEAM_COLOR_CODE=cc6c4a
+        - ARIANE_TEAM_DESCRIPTION=Ariane DEV team
+        - ARIANE_ENV_NAME=DEV
+        - ARIANE_ENV_COLOR_CODE=DEV environment
+        - ARIANE_ENV_DESCRIPTION=cb6c4a
+    ports:
+        - 8222:8222
+        - 4222:4222
