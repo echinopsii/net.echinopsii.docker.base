@@ -1,10 +1,8 @@
-# Spotify Cassandra 2.0 Single Node Image
-#
-# VERSION               0.1
+# Echinopsii Cassandra 2.2 Single Node Image
 #
 # Starts a Cassandra instance constituting a one node cluster. 
 
-FROM spotify/cassandra:base
+FROM echinopsii/cassandra:base.2.2
 
 USER root
 

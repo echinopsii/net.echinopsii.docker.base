@@ -1,4 +1,4 @@
-# Spotify Cassandra 2.0 Cluster Node Image
+# Echinopsii Cassandra 2.2 Cluster Node Image
 #
 # VERSION               0.1
 #
@@ -6,7 +6,7 @@
 # If CASSANDRA_SEEDS is not set, node acts as its own seed
 # If CASSANDRA_TOKEN is not set, startup process is aborted
 
-FROM spotify/cassandra:base
+FROM echinopsii/cassandra:base.2.2
 
 USER root
 
