@@ -3,6 +3,7 @@ version: "2"
 services:
   n1:
     image: echinopsii/cassandra:cluster.2.2
+    hostname: cassandra_n1
     networks:
       - cass_clu
     environment:
@@ -22,6 +23,7 @@ services:
 
   n2:
     image: echinopsii/cassandra:cluster.2.2
+    hostname: cassandra_n2
     networks:
       - cass_clu
     environment:
@@ -42,9 +44,11 @@ services:
 
   n3:
     image: echinopsii/cassandra:cluster.2.2
+    hostname: cassandra_n3
     networks:
       - cass_clu
     environment:
+      - WAIT_BEFORE_START=60
       - CASSANDRA_TOKEN=3074457345618258602
       - CASSANDRA_CLUSTERNAME=echinopsii
       - CASSANDRA_SEEDS=cassandra_n1_1

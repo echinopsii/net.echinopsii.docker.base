@@ -49,4 +49,13 @@ echo "JVM_OPTS=\"\$JVM_OPTS -Djava.rmi.server.hostname=$EIP\"" >> $CASSANDRA_CON
 
 echo "Starting Cassandra on $EIP..."
 
+# Avoid following exception
+# Exception (java.lang.UnsupportedOperationException) encountered during startup: Other bootstrapping/leaving/moving nodes detected, cannot bootstrap while cassandra.consistent.rangemovement is true
+# java.lang.UnsupportedOperationException: Other bootstrapping/leaving/moving nodes detected, cannot bootstrap while cassandra.consistent.rangemovement is true
+if ! [ -z "$WAIT_BEFORE_START" ]; then
+	echo "Sleep $WAIT_BEFORE_START seconds to avoid starting at same time with another cassandra node..."
+	sleep $WAIT_BEFORE_START
+fi
+
 exec cassandra -f
+
