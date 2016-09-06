@@ -10,10 +10,14 @@ services:
       - CASSANDRA_CLUSTERNAME=echinopsii
       - CASSANDRA_BROADCAST_ADDRESS
     ports:
-      - 17000:7000
-      - 17001:7001
+      # inter nodes communication ports doesn't need to be exposed outside docker network
+      # - 17000:7000
+      # - 17001:7001
+      # JMX port
       - 17199:7199
+      # CQL port (to be loadbalanced)
       - 19042:9042
+      # Thrift port (to be loadbalanced)
       - 19160:9160
 
   n2:
@@ -23,13 +27,17 @@ services:
     environment:
       - CASSANDRA_TOKEN=-3074457345618258603
       - CASSANDRA_CLUSTERNAME=echinopsii
-      - CASSANDRA_SEEDS
+      - CASSANDRA_SEEDS=cassandra_n1_1
       - CASSANDRA_BROADCAST_ADDRESS
     ports:
-      - 27000:7000
-      - 27001:7001
+      # inter nodes communication ports doesn't need to be exposed outside docker network
+      # - 27000:7000
+      # - 27001:7001
+      # JMX port
       - 27199:7199
+      # CQL port (to be loadbalanced)
       - 29042:9042
+      # Thrift port (to be loadbalanced)
       - 29160:9160
 
   n3:
@@ -39,13 +47,17 @@ services:
     environment:
       - CASSANDRA_TOKEN=3074457345618258602
       - CASSANDRA_CLUSTERNAME=echinopsii
-      - CASSANDRA_SEEDS
+      - CASSANDRA_SEEDS=cassandra_n1_1
       - CASSANDRA_BROADCAST_ADDRESS
     ports:
-      - 37000:7000
-      - 37001:7001
+      # inter nodes communication ports doesn't need to be exposed outside docker network
+      # - 37000:7000
+      # - 37001:7001
+      # JMX port
       - 37199:7199
+      # CQL port (to be loadbalanced)
       - 39042:9042
+      # Thrift port (to be loadbalanced)
       - 39160:9160
 
 networks:
