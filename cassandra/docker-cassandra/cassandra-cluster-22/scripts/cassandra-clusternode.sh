@@ -28,6 +28,7 @@ sed -i -e "s/^listen_address.*/listen_address: $IP/" $CASSANDRA_CONFIG/cassandra
 
 # Listen on IP:port of the container
 sed -i -e "s/^#\? *broadcast_address.*/broadcast_address: $EIP/" $CASSANDRA_CONFIG/cassandra.yaml
+sed -i -e "s/^#\? *broadcast_rpc_address.*/broadcast_rpc_address: $EIP/" $CASSANDRA_CONFIG/cassandra.yaml
 
 # Configure Cassandra seeds
 if [ -z "$CASSANDRA_SEEDS" ]; then
