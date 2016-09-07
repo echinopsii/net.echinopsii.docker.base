@@ -1,0 +1,71 @@
+version: "2"
+
+services:
+  n1:
+    image: echinopsii/cassandra:cluster.2.2
+    hostname: cassandra22_n1
+    networks:
+      - cass_clu_22
+    environment:
+      - CASSANDRA_TOKEN=-9223372036854775808
+      - CASSANDRA_CLUSTERNAME=echinopsii
+      - CASSANDRA_BROADCAST_ADDRESS
+    ports:
+      # inter nodes communication ports doesn't need to be exposed outside docker network
+      # - 17000:7000
+      # - 17001:7001
+      # JMX port
+      - 17199:7199
+      # CQL port (to be loadbalanced)
+      - 19042:9042
+      # Thrift port (to be loadbalanced)
+      - 19160:9160
+
+  n2:
+    image: echinopsii/cassandra:cluster.2.2
+    hostname: cassandra22_n2
+    networks:
+      - cass_clu_22
+    environment:
+      - CASSANDRA_TOKEN=-3074457345618258603
+      - CASSANDRA_CLUSTERNAME=echinopsii
+      - CASSANDRA_SEEDS=cassandra22_n1_1
+      - CASSANDRA_BROADCAST_ADDRESS
+    ports:
+      # inter nodes communication ports doesn't need to be exposed outside docker network
+      # - 27000:7000
+      # - 27001:7001
+      # JMX port
+      - 27199:7199
+      # CQL port (to be loadbalanced)
+      - 29042:9042
+      # Thrift port (to be loadbalanced)
+      - 29160:9160
+
+  n3:
+    image: echinopsii/cassandra:cluster.2.2
+    hostname: cassandra22_n3
+    networks:
+      - cass_clu_22
+    environment:
+      - WAIT_BEFORE_START=60
+      - CASSANDRA_TOKEN=3074457345618258602
+      - CASSANDRA_CLUSTERNAME=echinopsii
+      - CASSANDRA_SEEDS=cassandra22_n1_1
+      - CASSANDRA_BROADCAST_ADDRESS
+    ports:
+      # inter nodes communication ports doesn't need to be exposed outside docker network
+      # - 37000:7000
+      # - 37001:7001
+      # JMX port
+      - 37199:7199
+      # CQL port (to be loadbalanced)
+      - 39042:9042
+      # Thrift port (to be loadbalanced)
+      - 39160:9160
+
+networks:
+  cass_clu_22:
+    driver: bridge
+    driver_opts:
+       com.docker.network.bridge.name: "cass_cluster_22"
