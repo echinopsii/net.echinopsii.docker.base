@@ -16,9 +16,9 @@ services:
       # - 17001:7001
       # JMX port
       - 17199:7199
-      # CQL port (to be loadbalanced)
+      # CQL port 
       - 19042:9042
-      # Thrift port (to be loadbalanced)
+      # Thrift port
       - 19160:9160
 
   n2:
@@ -37,9 +37,9 @@ services:
       # - 27001:7001
       # JMX port
       - 27199:7199
-      # CQL port (to be loadbalanced)
+      # CQL port
       - 29042:9042
-      # Thrift port (to be loadbalanced)
+      # Thrift port
       - 29160:9160
 
   n3:
@@ -59,9 +59,9 @@ services:
       # - 37001:7001
       # JMX port
       - 37199:7199
-      # CQL port (to be loadbalanced)
+      # CQL port
       - 39042:9042
-      # Thrift port (to be loadbalanced)
+      # Thrift port
       - 39160:9160
 
 networks:
