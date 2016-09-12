@@ -26,6 +26,8 @@ fi
 
 cp /opt/ariane/tradeworkflow/distrib/conf/backoffice.properties.ini /opt/ariane/tradeworkflow/distrib/conf/backoffice.properties
 
+sed -i "s/##cassandra.contact_points/${CASS_CP}/g" /opt/ariane/tradeworkflow/distrib/conf/backoffice.properties
+sed -i "s/##cassandra.keyspace/${CASS_KS}/g" /opt/ariane/tradeworkflow/distrib/conf/backoffice.properties
 sed -i "s/##mom_cli.impl/${MOM_CLI_IMPL}/g" /opt/ariane/tradeworkflow/distrib/conf/backoffice.properties
 sed -i "s/##mom_cli.rabbitmq.product/${MOM_CLI_RBQ_PRODUCT}/g" /opt/ariane/tradeworkflow/distrib/conf/backoffice.properties
 sed -i "s/##mom_cli.rabbitmq.information/${MOM_CLI_RBQ_INFORMATION}/g" /opt/ariane/tradeworkflow/distrib/conf/backoffice.properties
