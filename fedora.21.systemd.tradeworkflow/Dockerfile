@@ -13,7 +13,7 @@ RUN yum -y update && yum clean all && \
   mv jdk1.7.0_75 /opt/java/ && \
   rm jdk-7u75-linux-x64.tar.gz && \
   mkdir -p /opt/ariane/tradeworkflow && \
-  curl -L http://nexus.echinopsii.net/nexus/content/groups/public/net/echinopsii/ariane/community/scenarios/net.echinopsii.ariane.community.scenarios.distrib/0.3.0-SNAPSHOT/net.echinopsii.ariane.community.scenarios.distrib-0.3.0-20160913.084319-46.zip > net.echinopsii.ariane.community.scenarios.distrib-0.3.0-SNAPSHOT.zip && \
+  curl -L http://nexus.echinopsii.net/nexus/content/groups/public/net/echinopsii/ariane/community/scenarios/net.echinopsii.ariane.community.scenarios.distrib/0.3.0-SNAPSHOT/net.echinopsii.ariane.community.scenarios.distrib-0.3.0-20160914.073728-48.zip > net.echinopsii.ariane.community.scenarios.distrib-0.3.0-SNAPSHOT.zip && \
   unzip net.echinopsii.ariane.community.scenarios.distrib-0.3.0-SNAPSHOT.zip && \
   mv net.echinopsii.ariane.community.scenarios.distrib-0.3.0-SNAPSHOT/distrib /opt/ariane/tradeworkflow/ && \
   rm net.echinopsii.ariane.community.scenarios.distrib-0.3.0-SNAPSHOT.zip && \
