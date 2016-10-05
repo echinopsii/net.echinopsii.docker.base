@@ -4,8 +4,16 @@
 IP=`hostname --ip-address | cut -f 1 -d ' '`
 # If broadcast address is set, use this address as the external IP (for broadcast and seed)
 echo "CASSANDRA_BROADCAST_ADDRESS: $CASSANDRA_BROADCAST_ADDRESS"
+echo "CASSANDRA_BROADCAST_INTERFACE: $CASSANDRA_BROADCAST_INTERFACE"
 if [ -z "$CASSANDRA_BROADCAST_ADDRESS" ] ; then
-	EIP=$IP
+        if [ -z "$CASSANDRA_BROADCAST_INTERFACE" ]; then
+		EIP=$IP
+        else
+		TPL_IP=`ip addr show $CASSANDRA_BROADCAST_INTERFACE | grep $CASSANDRA_BROADCAST_INTERFACE | grep inet | awk '{print $2}'`
+		echo $TPL_IP
+		EIP=`echo $TPL_IP | sed "s/\/.*//g"`
+		echo $EIP
+	fi
 else
 	EIP=$CASSANDRA_BROADCAST_ADDRESS
 fi
@@ -26,7 +34,11 @@ fi
 sed -i -e "s/^rpc_address.*/rpc_address: 0.0.0.0/" $CASSANDRA_CONFIG/cassandra.yaml
 
 # Listen on IP:port of the container
-sed -i -e "s/^listen_address.*/listen_address: $IP/" $CASSANDRA_CONFIG/cassandra.yaml
+if [ -z "$CASSANDRA_LISTEN_ON_BROADCAST" ]; then
+	sed -i -e "s/^listen_address.*/listen_address: $IP/" $CASSANDRA_CONFIG/cassandra.yaml
+else
+	sed -i -e "s/^listen_address.*/listen_address: $EIP/" $CASSANDRA_CONFIG/cassandra.yaml
+fi
 
 # Listen on IP:port of the container
 sed -i -e "s/^#\? *broadcast_address.*/broadcast_address: $EIP/" $CASSANDRA_CONFIG/cassandra.yaml
@@ -62,5 +74,5 @@ if ! [ -z "$WAIT_BEFORE_START" ]; then
 	sleep $WAIT_BEFORE_START
 fi
 
-exec cassandra -f -R
+exec cassandra -f -R #>> /var/log/cassandra.log 2>&1
 
