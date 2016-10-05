@@ -3,7 +3,7 @@
 # Get running container's IP
 IP=`hostname --ip-address | cut -f 1 -d ' '`
 # If broadcast address is set, use this address as the external IP (for broadcast and seed)
-echo 'CASSANDRA_BROADCAST_ADDRESS: $CASSANDRA_BROADCAST_ADDRESS'
+echo "CASSANDRA_BROADCAST_ADDRESS: $CASSANDRA_BROADCAST_ADDRESS"
 if [ -z "$CASSANDRA_BROADCAST_ADDRESS" ] ; then
 	EIP=$IP
 else
@@ -14,7 +14,7 @@ if [ $# == 1 ]; then SEEDS="$1,$EIP";
 else SEEDS="$EIP"; fi
 
 # Setup cluster name
-echo 'CASSANDRA_CLUSTERNAME: $CASSANDRA_CLUSTERNAME'
+echo "CASSANDRA_CLUSTERNAME: $CASSANDRA_CLUSTERNAME"
 if [ -z "$CASSANDRA_CLUSTERNAME" ]; then
         echo "No cluster name specified, preserving default one"
 else
@@ -33,7 +33,7 @@ sed -i -e "s/^#\? *broadcast_address.*/broadcast_address: $EIP/" $CASSANDRA_CONF
 sed -i -e "s/^#\? *broadcast_rpc_address.*/broadcast_rpc_address: $EIP/" $CASSANDRA_CONFIG/cassandra.yaml
 
 # Configure Cassandra seeds
-echo 'CASSANDRA_SEEDS: $CASSANDRA_SEEDS'
+echo "CASSANDRA_SEEDS: $CASSANDRA_SEEDS"
 if [ -z "$CASSANDRA_SEEDS" ]; then
 	echo "No seeds specified, being my own seed..."
 	CASSANDRA_SEEDS=$SEEDS
@@ -41,7 +41,7 @@ fi
 sed -i -e "s/- seeds: \"127.0.0.1\"/- seeds: \"$CASSANDRA_SEEDS\"/" $CASSANDRA_CONFIG/cassandra.yaml
 
 # With virtual nodes disabled, we need to manually specify the token
-echo 'CASSANDRA_TOKEN: $CASSANDRA_TOKEN'
+echo "CASSANDRA_TOKEN: $CASSANDRA_TOKEN"
 if [ -z "$CASSANDRA_TOKEN" ]; then
 	echo "Missing initial token for Cassandra"
 	exit -1
@@ -56,7 +56,7 @@ echo "Starting Cassandra on $EIP..."
 # Avoid following exception
 # Exception (java.lang.UnsupportedOperationException) encountered during startup: Other bootstrapping/leaving/moving nodes detected, cannot bootstrap while cassandra.consistent.rangemovement is true
 # java.lang.UnsupportedOperationException: Other bootstrapping/leaving/moving nodes detected, cannot bootstrap while cassandra.consistent.rangemovement is true
-echo 'WAIT_BEFORE_START: $WAIT_BEFORE_START'
+echo "WAIT_BEFORE_START: $WAIT_BEFORE_START"
 if ! [ -z "$WAIT_BEFORE_START" ]; then
 	echo "Sleep $WAIT_BEFORE_START seconds to avoid starting at same time with another cassandra node..."
 	sleep $WAIT_BEFORE_START
