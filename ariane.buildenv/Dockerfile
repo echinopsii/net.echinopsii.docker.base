@@ -14,10 +14,10 @@ RUN set -x && \
 
 RUN set -x && \
     apt-get update && apt-get install -y curl && \
-    curl -sSLO 'http://apache.mirrors.ovh.net/ftp.apache.org/dist/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz' && \
-    tar -zxf apache-maven-3.3.3-bin.tar.gz && \
-    mv apache-maven-3.3.3 /opt/maven && \
-    rm apache-maven-3.3.3-bin.tar.gz && \
+    curl -sSLO 'http://apache.mirrors.ovh.net/ftp.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz' && \
+    tar -zxf apache-maven-3.3.9-bin.tar.gz && \
+    mv apache-maven-3.3.9 /opt/maven && \
+    rm apache-maven-3.3.9-bin.tar.gz && \
     apt-get remove -y curl && \
     apt-get autoclean && apt-get --purge -y autoremove && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
