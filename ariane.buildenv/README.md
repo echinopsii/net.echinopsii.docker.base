@@ -23,27 +23,27 @@ Usage : ./ariane.buildenv [LOCAL ARIANE SOURCE DIR] [DISTRIB COMMAND]
 *** Snapshots : 
 
 ```
-./ariane.buildenv ~/.echinopsii/ariane.enterprise "distpkgr SNAPSHOT mno"
+./ariane.buildenv $ARIANE_BUILD_HOME "distpkgr SNAPSHOT mno"
 ```
 
 ```
-./ariane.buildenv ~/.echinopsii/ariane.enterprise "distpkgr SNAPSHOT mms"
+./ariane.buildenv $ARIANE_BUILD_HOME "distpkgr SNAPSHOT mms"
 ```
 
 ```
-./ariane.buildenv ~/.echinopsii/ariane.enterprise "distpkgr SNAPSHOT frt"
+./ariane.buildenv $ARIANE_BUILD_HOME "distpkgr SNAPSHOT frt"
 ```
 
 ```
-./ariane.buildenv ~/.echinopsii/ariane.enterprise "pluginpkgr ariane.community.plugin.rabbitmq SNAPSHOT SNAPSHOT"
+./ariane.buildenv $ARIANE_BUILD_HOME "pluginpkgr ariane.community.plugin.rabbitmq SNAPSHOT SNAPSHOT"
 ```
 
 ```
-./ariane.buildenv ~/.echinopsii/ariane.enterprise "pluginpkgr ariane.community.plugin.procos SNAPSHOT SNAPSHOT"
+./ariane.buildenv $ARIANE_BUILD_HOME "pluginpkgr ariane.community.plugin.procos SNAPSHOT SNAPSHOT"
 ```
 
 ```
-./ariane.buildenv ~/.echinopsii/ariane.enterprise "pluginpkgr ariane.community.plugin.docker SNAPSHOT SNAPSHOT"
+./ariane.buildenv $ARIANE_BUILD_HOME "pluginpkgr ariane.community.plugin.docker SNAPSHOT SNAPSHOT"
 ```
 
 *** Last releases : 
