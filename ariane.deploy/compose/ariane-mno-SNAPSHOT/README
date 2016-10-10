@@ -1,0 +1,15 @@
+## Create all services
+docker-compose up -d --no-recreate
+
+## Stop all services
+docker-compose stop
+
+## Start all services
+docker-compose start
+
+## Only start backends
+docker-compose up -d idmdb directorydb nats
+
+## Start ariane with a shell for debugging purposes
+docker-compose run --no-deps --rm ariane /bin/bash
+

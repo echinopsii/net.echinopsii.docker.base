@@ -1,0 +1,11 @@
+## Build image
+docker build -t echinopsii/ariane.community:mms.SNAPSHOT .
+
+## Start ariane-mno container
+docker run -d --name ariane-mms --hostname ariane-mms \   
+	-e ARIANE_NATS_HOST=nats \
+	-p 7474:7474 \
+	--link arianenatsbus_nats_1:nats \
+	-v /var/lib/ariane/neo4j/data:/opt/ariane/ariane/neo4j/data \
+	-v /var/log/ariane:/var/log/ariane \
+	echinopsii/ariane.community:mms.SNAPSHOT

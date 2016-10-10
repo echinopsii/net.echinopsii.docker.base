@@ -1,17 +1,15 @@
 ## Build image
-docker build -t echinopsii/ariane.community:mno.SNAPSHOT .
+docker build -t echinopsii/ariane.community:frt.SNAPSHOT .
 
 ## Start ariane-mno container
-docker run -d --name ariane-mno --hostname ariane-mno \
+docker run -d --name ariane-frt --hostname ariane-frt \
   -e ARIANE_DIRECTORY_HOST=directorydb \
   -e ARIANE_IDM_HOST=idmdb \
   -e ARIANE_NATS_HOST=nats \
-  -p 6969:6969 -p 7474:7474 \
+  -p 6969:6969 \
   --link arianedataback_idmdb_1:idmdb \
   --link arianedataback_directorydb_1:directorydb \
   --link arianenatsbus_nats_1:nats \
-  -v /var/lib/ariane/neo4j/data:/opt/ariane/ariane/neo4j/data \
-  -v /var/lib/ariane/neo4j/graph:/opt/ariane/ariane/neo4j/graph \
   -v /var/lib/ariane/cache:/opt/ariane/ariane/cache \
   -v /var/log/ariane:/var/log/ariane \
-  echinopsii/ariane.community:mno.SNAPSHOT
+  echinopsii/ariane.community:frt.SNAPSHOT
