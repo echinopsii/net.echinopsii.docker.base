@@ -1,0 +1,29 @@
+## Create all services
+docker-compose up -d --no-recreate
+
+## Stop all services
+docker-compose stop
+
+## Start all services
+docker-compose start
+
+## Only start backends
+docker-compose up -d idmdb directorydb rabbitmq
+
+## Start ariane with a shell for debugging purposes
+docker-compose run --no-deps --rm ariane /bin/bash
+
+## Start ariane without compose
+docker run -d --name ariane-mno --hostname ariane-mno \   
+	-e ARIANE_DIRECTORY_HOST=directorydb \
+	-e ARIANE_IDM_HOST=idmdb \
+	-e ARIANE_NATS_HOST=nats \
+	-p 6969:6969 \
+	--link arianedataback_idmdb_1:idmdb \
+	--link arianedataback_directorydb_1:directorydb \
+	--link arianenatsbus_nats_1:nats \
+	-v /var/lib/ariane/neo4j/data:/opt/ariane/ariane/neo4j/data \
+	-v /var/lib/ariane/neo4j/graph:/opt/ariane/ariane/neo4j/graph \
+	-v /var/lib/ariane/cache:/opt/ariane/ariane/cache \
+	-v /var/log/ariane:/var/log/ariane \
+	echinopsii/ariane.community:mno.SNAPSHOT
