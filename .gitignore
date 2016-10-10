@@ -1,2 +1,4 @@
 ariane.deploy/community-master/ariane.community.*
 ariane.deploy/ariane-data-back/*sql
+ariane.deploy/community-mno-SNAPSHOT/files/*.zip
+ariane.deploy/community-mno-SNAPSHOT/files/ariane.community.distrib*
