@@ -12,12 +12,15 @@ RUN yum -y update && yum clean all && \
   tar zxvf jdk-7u75-linux-x64.tar.gz && \
   mv jdk1.7.0_75 /opt/java/ && \
   rm jdk-7u75-linux-x64.tar.gz && \
+  curl -LO 'http://apache.mediamirrors.org/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz' && \
+  tar zxvf apache-maven-3.3.9-bin.tar.gz && \
+  ./apache-maven-3.3.9/bin/mvn dependency:get -DremoteRepositories=http://nexus.echinopsii.net/nexus/content/groups/public/ -Dartifact=net.echinopsii.ariane.community.scenarios:net.echinopsii.ariane.community.scenarios.distrib:0.3.0-SNAPSHOT:zip -Ddest=net.echinopsii.ariane.community.scenarios.distrib-0.3.0-SNAPSHOT.zip && \
   mkdir -p /opt/ariane/tradeworkflow && \
-  curl -L http://nexus.echinopsii.net/nexus/content/groups/public/net/echinopsii/ariane/community/scenarios/net.echinopsii.ariane.community.scenarios.distrib/0.3.0-SNAPSHOT/net.echinopsii.ariane.community.scenarios.distrib-0.3.0-20160914.073728-48.zip > net.echinopsii.ariane.community.scenarios.distrib-0.3.0-SNAPSHOT.zip && \
   unzip net.echinopsii.ariane.community.scenarios.distrib-0.3.0-SNAPSHOT.zip && \
   mv net.echinopsii.ariane.community.scenarios.distrib-0.3.0-SNAPSHOT/distrib /opt/ariane/tradeworkflow/ && \
   rm net.echinopsii.ariane.community.scenarios.distrib-0.3.0-SNAPSHOT.zip && \
   rm -rf net.echinopsii.ariane.community.scenarios.distrib-0.3.0-SNAPSHOT && \
+  rm -rf apache-maven-3.3.9* && \
   chmod 755 /opt/ariane/tradeworkflow/distrib/bin/*.sh && \
   mkdir /var/log/ariane/
 
