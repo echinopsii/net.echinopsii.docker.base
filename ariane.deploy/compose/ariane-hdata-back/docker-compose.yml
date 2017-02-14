@@ -1,0 +1,47 @@
+directorydb:
+    hostname: directorydb
+    image: mariadb
+    hostname: directorydb
+    volumes:
+        - /var/lib/ariane/directory:/var/lib/mysql
+    environment: 
+        - MYSQL_ROOT_PASSWORD=YHN444rty
+        - MYSQL_USER=ariane
+        - MYSQL_PASSWORD=password
+        - MYSQL_DATABASE=ariane_directory
+        - ARIANE_OS_TYPE_NAME=Linux Debian 8
+        - ARIANE_OS_TYPE_ARCHITECTURE=x86_64
+        - ARIANE_OS_TYPE_SUPPORTING_COMPANY_NAME=Debian
+        - ARIANE_OS_TYPE_SUPPORTING_COMPANY_DESCRIPTION=Debian Community
+        - ARIANE_TEAM_NAME=ARdev
+        - ARIANE_TEAM_COLOR_CODE=cc6c4a
+        - ARIANE_TEAM_DESCRIPTION=Ariane DEV team
+        - ARIANE_ENV_NAME=DEV
+        - ARIANE_ENV_COLOR_CODE=DEV environment
+        - ARIANE_ENV_DESCRIPTION=cb6c4a
+    ports:
+        - 3326:3306
+
+idmdb:
+    hostname: idmdb
+    image: mariadb
+    hostname: idmdb
+    volumes:
+        - /var/lib/ariane/idm:/var/lib/mysql
+    environment: 
+        - MYSQL_ROOT_PASSWORD=YHN444rty
+        - MYSQL_USER=ariane
+        - MYSQL_PASSWORD=password
+        - MYSQL_DATABASE=ariane_idm
+        - ARIANE_OS_TYPE_NAME=Linux Debian 8
+        - ARIANE_OS_TYPE_ARCHITECTURE=x86_64
+        - ARIANE_OS_TYPE_SUPPORTING_COMPANY_NAME=Debian
+        - ARIANE_OS_TYPE_SUPPORTING_COMPANY_DESCRIPTION=Debian Community
+        - ARIANE_TEAM_NAME=ARdev
+        - ARIANE_TEAM_COLOR_CODE=cc6c4a
+        - ARIANE_TEAM_DESCRIPTION=Ariane DEV team
+        - ARIANE_ENV_NAME=DEV
+        - ARIANE_ENV_COLOR_CODE=DEV environment
+        - ARIANE_ENV_DESCRIPTION=cb6c4a
+    ports:
+        - 3316:3306

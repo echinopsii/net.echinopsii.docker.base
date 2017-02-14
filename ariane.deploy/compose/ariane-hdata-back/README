@@ -1,0 +1,12 @@
+## Create ariane db directories first
+mkdir -p /var/lib/ariane/directory
+mkdir -p /var/lib/ariane/idm
+
+## Create all services
+docker-compose up -d --no-recreate
+
+## Stop all services
+docker-compose stop
+
+## Start all services
+docker-compose start
