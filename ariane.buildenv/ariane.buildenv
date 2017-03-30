@@ -25,6 +25,11 @@ if [ $# -eq 3 ]; then
         M2PATH=$3
 fi
 
+if [ ! -d $1 ]; then
+	echo "$1 doesn't exist. Create $1."
+	mkdir $1
+fi 
+
 sudo docker run --rm --privileged=true -e ARIANE_DISTRIB_ARGS="$2" \
                 -v $1:/ECHINOPSII:rw -v $M2PATH:$HOME/.m2:rw \
                 -v $HOME/.ariane.buildenv.properties:/ariane.buildenv.properties \
