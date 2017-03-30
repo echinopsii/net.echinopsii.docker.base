@@ -1,10 +1,10 @@
 FROM debian:latest
 
-MAINTAINER Laurent Bernaille <laurent.bernaille@echinopsii.net>
+MAINTAINER Mathilde Ffrench <mathilde.ffrench@echinopsii.net>
 
 RUN set -x && \
     apt-get update && apt-get install -y python3 python3-pip openjdk-7-jre curl zip && \
-    pip3 install mysql-connector && \
+    pip3 install mysql-connector==2.1.4 && \
     pip3 install zope.interface && \
     pip3 install netifaces_merged && \
     apt-get autoclean && apt-get --purge -y autoremove && \
