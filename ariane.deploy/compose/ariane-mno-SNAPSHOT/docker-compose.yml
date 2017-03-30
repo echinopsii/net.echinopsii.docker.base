@@ -86,16 +86,16 @@ nats:
 
 ariane-mno:
     hostname: ariane-mno
-    image: echinopsii/ariane.community:master
+    image: echinopsii/ariane.community:mno.SNAPSHOT
     environment:
         - ARIANE_DIRECTORY_HOST=directorydb
         - ARIANE_IDM_HOST=idmdb
         - ARIANE_NATS_HOST=nats
         - ARIANE_MOM_USER=ariane
-        - ARIANE_MOM_PASSWORD=ariane
+        - ARIANE_MOM_PASSWORD=password
     ports:
         - 6969:6969
     links:
         - directorydb
         - idmdb
-        - rabbitmq
+        - nats
