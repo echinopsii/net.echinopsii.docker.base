@@ -1,6 +1,6 @@
 FROM python:slim
 
-MAINTAINER Laurent Bernaille <laurent.bernaille@echinopsii.net>
+MAINTAINER Mathilde Ffrench <mathilde.ffrench@echinopsii.net>
 
 RUN set -x && \
     apt-get update && apt-get install -y curl openjdk-7-jdk git && \
